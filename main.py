@@ -26,7 +26,7 @@ def stock_info():
         result = cursor.fetchone()
         get_day(tsCode)
         if result:
-            return
+            continue
 
         # SQL 插入语句
         sql = "INSERT INTO `tb_stock_info`(`code`, `symbol`, `name`, `area`, `industry`, `online_date`) VALUES ('"+tsCode+"','"+symbol+"','"+name+"','"+area+"','"+industry+"','"+listDate+"')"
@@ -73,7 +73,7 @@ def insert_detail(df, code):
         vol = df["vol"][s - 1]
         amount = df["amount"][s - 1]
 
-        sql = "INSERT INTO `tb_stock_info_detail`(`code`, `symbol`, `open`, `high`, `low`, `close`, `change`, `vol`, `amount`, `trade_date`) VALUES('"+trade_date+"','"+code+"', "+str(open)+", "+str(high)+", "+str(low)+", "+str(close)+", "+str(change)+", "+str(vol)+", "+str(amount)+", '"+trade_date+"')"
+        sql = "INSERT INTO `tb_stock_info_detail`(`code`, `symbol`, `open`, `high`, `low`, `close`, `change`, `vol`, `amount`, `trade_date`) VALUES('"+code[0:6]+"','"+code+"', "+str(open)+", "+str(high)+", "+str(low)+", "+str(close)+", "+str(change)+", "+str(vol)+", "+str(amount)+", '"+trade_date+"')"
         cursor.execute(sql)
         s = s - 1
     return
